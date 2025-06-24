@@ -9,6 +9,7 @@ const api = axios.create({
 
 export const productService = {
     getAllProducts: async (): Promise<Product[]> => {
+        // which parameter is this
         const response = await api.get<Product[]>('/products');
         return response.data;
     },
