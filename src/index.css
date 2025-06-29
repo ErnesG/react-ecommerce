@@ -1,17 +1,141 @@
+/**
+ * @fileoverview Global Styles and Tailwind CSS Integration
+ * 
+ * This file serves as the main stylesheet for the React E-commerce application,
+ * integrating Tailwind CSS with custom styles using Tailwind's layer system.
+ * It establishes the foundation for the entire application's visual design.
+ * 
+ * @version 1.0.0
+ * @see {@link https://tailwindcss.com/docs/adding-custom-styles} Tailwind Custom Styles
+ * @see {@link https://tailwindcss.com/docs/functions-and-directives#layer} Layer Documentation
+ */
+
+/**
+ * TAILWIND CSS CORE DIRECTIVES
+ * 
+ * These three directives inject Tailwind's generated styles into the CSS.
+ * The order is critical and follows Tailwind's cascading architecture.
+ * 
+ * 🏗️ ARCHITECTURE OVERVIEW:
+ * 1. Base Layer: CSS resets, element defaults, and foundational styles
+ * 2. Components Layer: Custom component classes and design patterns
+ * 3. Utilities Layer: Atomic utility classes for fine-grained control
+ * 
+ * 📦 BUILD PROCESS:
+ * - Tailwind scans your content files for class usage
+ * - Only generates CSS for classes actually used in your code
+ * - Applies tree-shaking to minimize bundle size
+ * - Processes these directives at build time
+ */
+
+/* 
+ * BASE LAYER - Foundational Styles
+ * Contains CSS resets, element defaults, and low-specificity base styles.
+ * These styles establish consistent cross-browser behavior and typography.
+ */
 @tailwind base;
+
+/* 
+ * COMPONENTS LAYER - Design System Components
+ * Contains custom component classes that can be used throughout the application.
+ * These are reusable patterns that encapsulate common design elements.
+ */
 @tailwind components;
+
+/* 
+ * UTILITIES LAYER - Atomic CSS Classes
+ * Contains all of Tailwind's utility classes for fine-grained styling control.
+ * These have the highest specificity and can override component styles.
+ */
 @tailwind utilities;
 
+/**
+ * CUSTOM BASE LAYER STYLES
+ * 
+ * Extends Tailwind's base layer with application-specific foundational styles.
+ * These styles apply to HTML elements directly and establish global design tokens.
+ * 
+ * 🎯 DESIGN DECISIONS:
+ * - Uses @apply directive to compose Tailwind utilities
+ * - Maintains consistency with Tailwind's utility-first approach
+ * - Applies to semantic HTML elements for automatic styling
+ */
 @layer base {
+  /**
+   * Body Element - Global Typography and Rendering
+   * 
+   * Sets foundational typography and rendering optimizations for the entire application.
+   * These styles cascade to all child elements unless specifically overridden.
+   * 
+   * 🖋️ TYPOGRAPHY CHOICES:
+   * - font-sans: System font stack for optimal performance and native feel
+   * - antialiased: Smooth font rendering across different displays and browsers
+   * 
+   * 💡 PERFORMANCE BENEFITS:
+   * - System fonts load instantly (no web font download delay)
+   * - Consistent appearance across operating systems
+   * - Reduced visual layout shift during page load
+   */
   body {
     @apply font-sans antialiased;
   }
 }
 
+/**
+ * CUSTOM COMPONENTS LAYER
+ * 
+ * Defines reusable component classes that encapsulate common design patterns.
+ * These classes provide consistent styling for frequently used UI elements
+ * while maintaining the flexibility of Tailwind's utility system.
+ * 
+ * 🏗️ COMPONENT DESIGN PRINCIPLES:
+ * - Semantic naming that describes purpose, not appearance
+ * - Consistent with the established design system
+ * - Built using @apply directive for maintainable utility composition
+ * - Provides hover states and transitions for interactive elements
+ */
 @layer components {
+  /**
+   * Primary Button Component - Main Call-to-Action Style
+   * 
+   * The primary button represents the most important actions in the interface.
+   * Used for primary actions like "Add to Cart", "Buy Now", form submissions.
+   * 
+   * 🎨 DESIGN RATIONALE:
+   * - Uses primary brand color (primary-500) for strong visual hierarchy
+   * - Darker hover state (primary-600) provides clear interaction feedback
+   * - White text ensures accessibility and contrast compliance
+   * - Rounded corners (rounded-lg) create modern, friendly appearance
+   * - Smooth transitions enhance perceived performance and polish
+   * 
+   * 🔧 TECHNICAL DETAILS:
+   * - transition-colors: Only animates color properties for performance
+   * - font-medium: Balanced weight that's readable but authoritative
+   * - Consistent padding (py-2 px-4) creates predictable button sizing
+   */
   .btn-primary {
     @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded-lg transition-colors;
   }
+
+  /**
+   * Secondary Button Component - Supporting Action Style
+   * 
+   * Secondary buttons are used for less critical actions or when multiple
+   * buttons appear together. They provide clear hierarchy without competing
+   * with primary actions.
+   * 
+   * 🎨 DESIGN RATIONALE:
+   * - Neutral gray background maintains visual hierarchy
+   * - Subtle hover state provides interaction feedback without dominance
+   * - Dark gray text ensures readability and accessibility
+   * - Consistent sizing and transitions with primary button
+   * 
+   * 🔍 USAGE SCENARIOS:
+   * - Cancel actions in forms or modals
+   * - Secondary actions in button groups
+   * - Navigation elements that need button styling
+   * - Alternative options alongside primary actions
+   */
   .btn-secondary {
     @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors;
   }
